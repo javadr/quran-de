@@ -1,7 +1,9 @@
 \documentclass{article}
 \usepackage[margin=2cm]{geometry}
 \usepackage{arabxetex} % for typesetting Arabic text in Rigth−To−Left direction
-\usepackage[all, trans={fa,en,de,lt}]{quran-de} % trans={fa,en,de,lt} option would be sent to quran package
+
+% trans={fa,en,de,lt} option would be sent to quran package
+\usepackage[all, trans={fa,en,de,lt}, wordwise]{quran-de} 
 
 \newcommand{\compare}[1]{%
     \def\setTr##1{\par\deSetTrans{##1}\fbox{\makebox[2cm]{\deGetTrans}}}
@@ -14,20 +16,26 @@
 }
 \newcommand{\para}[2]{\noindent%
 \begin{minipage}{.4\textwidth}
-%\baselineskip=1.4\baselineskip
 \begin{arab}[utf]#1\end{arab}
 \end{minipage}\hfill
 \begin{minipage}{.55\textwidth}
-%\baselineskip=1.4\baselineskip
 #2
 \end{minipage}
 }
 
 \begin{document}
 
+\quranayahde[1][1][4]+
+
+\begin{arab}[utf]
+\quranayah[2][5][2]+
+\end{arab}
+
 \para{\quranayah[Al-Ikhlas][1-4]}{\quranayahlt[Al-Ikhlas][1-4]}
 \bigskip
 \para{\quranayahfa[Al-Ikhlas][1-4]}{\quranayahen[Al-Ikhlas][1-4]}
+
+\quransurahde*
 
 \compare{\quransurahde*}
 \compare{\quranayahde[1][1]}

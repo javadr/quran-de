@@ -1,6 +1,6 @@
 %% This is file `quran-de.sty', and it's completely relies on the quran package.
 %% 
-%% Copyright © 2018-2019 by Seiied-Mohammad-Javad Razavian
+%% Copyright © 2018-2020 by Seiied-Mohammad-Javad Razavian
 %% <javadr@gmail.com>
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3
@@ -21,22 +21,11 @@
 %%
 %% To one having devoted his life to the Holy Quran
 %%
-%% Change Log
-%% ver 0.141 ## May 4th, 2019
-%% typo correction.
-%% ver 0.14 ## December 31th, 2018
-%% Now \deSetTrans also accepts integers as its argument.
-%% ver 0.13 ## December 19th, 2018
-%% \deGetTrans return the name of current translation. 
-%% ver 0.12 ## December 14th, 2018
-%% support for name in options of  \deSetTrans
-%% ver 0.1 ## December 1st, 2018
-%% initial commit
 \NeedsTeXFormat{LaTeX2e}
-\def\qurandedate{2019/05/04}
-\def\qurandeversion{ver 0.141}
+\def\qurandedate{2020/03/07}
+\def\qurandeversion{0.2}
 \ProvidesPackage{quran-de}[%
-\qurandedate\space \qurandeversion\space 
+\qurandedate\space v\qurandeversion\space^^J 
 German translations extension to the quran package.%
 ]
 \RequirePackage{xstring}
@@ -50,7 +39,7 @@ German translations extension to the quran package.%
 \else
     \ExecuteOptionsX{aburida}
 \fi
-\RequirePackage[transde]{quran}
+\RequirePackage[transde]{quran}[2020/03/03]
 %
 \ifde@aburida%
     \PackageInfo{quran-de}{aburida's translation is chosen.}%
@@ -64,20 +53,20 @@ German translations extension to the quran package.%
 \ifde@zaidan%
     \PackageInfo{quran-de}{zaidan's translation is chosen.}%
 \fi%
-\newcount\trans@de
-\trans@de=\z@
+\newcount\trans@de%
+\trans@de=\z@%
 \define@choicekey*+{quran-de}{trans}[\val\nr]{aburida,bubenheim,khoury,zaidan}{%
     \ifcase\nr\relax
-        \global\trans@de=\z@\relax
+        \global\trans@de=\z@\relax%
     \or
-        \global\trans@de=\@ne\relax
+        \global\trans@de=\@ne\relax%
     \or
-        \global\trans@de=\tw@\relax
+        \global\trans@de=\tw@\relax%
     \or
-        \global\trans@de=\thr@@\relax
+        \global\trans@de=\thr@@\relax%
  \fi}{%
     \PackageWarning{quran-de}{\string \deSetTrans' paramenter should be one of  `aburida', `bubenheim', `khoury', or `zaidan'. The package sets to `aburida' by default.}{}%
-    \global\trans@de=\z@\relax
+    \global\trans@de=\z@\relax%
 }%
 \newcommand*{\deGetTrans}{%
     \ifcase\trans@de
@@ -96,13 +85,17 @@ German translations extension to the quran package.%
 {%Yes
 \count255=#1%
 \advance\count255 by -1\relax%
-\trans@de=\count255}%
-{%NO
-\setkeys{quran-de}{trans=#1}}%
+\trans@de=\count255%
+}{%NO
+\setkeys{quran-de}{trans=#1}%
+}%
 %
-\makeatother
-\let\bidi@newrobustcmd\bidi@renewrobustcmd
-\makeatletter
+%\let\bidi@newrobustcmd\bidi@renewrobustcmd
+\ifqt@wordwise%
+    \makeatother\let\qt@newcmd\renewcommand\makeatletter%
+\else%
+    \makeatother\let\qt@newcmd\bidi@renewrobustcmd\makeatletter%
+\fi%
 \ifcase\trans@de%
     \ifde@aburida%
         \ifx\basmalahde\relax\else%
