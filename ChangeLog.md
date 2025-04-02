@@ -1,4 +1,6 @@
 %% Change Log
+%% ver 0.21 ## March 31st, 2025
+%% No parentheses inside \qt@no in the Quran text script file.
 %% ver 0.2 ## March 7th, 2020
 %% update in compliance with quran.sty to support wordwise option. 
 %% ver 0.141 ## May 4th, 2019
